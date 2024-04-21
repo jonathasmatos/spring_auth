@@ -27,11 +27,11 @@ public class CreateUserService {
 
   public User create(User obj) {
 
-    // User existsUser = userRepository.findByUsername(obj.getUsername());
+    User existsUser = userRepository.findByUsername(obj.getUsername());
 
-    // if (existsUser != null) {
-    //   throw new Error("Usuario Existente!");
-    // }
+    if (existsUser != null) {
+      throw new Error("Usuario Existente!");
+    }
 
     obj.setPassword(passwordEncoder().encode(obj.getPassword()));
 
@@ -44,9 +44,9 @@ public class CreateUserService {
 		
 		User objSaved =  findById(obj.getId());
 
-    // if (!obj.getUsername().equalsIgnoreCase(objSaved.getUsername()) ) {
-		// 	throw new Error("Já existe um usuário cadastrado com este userName.");
-		// }
+    if (!obj.getId().equals(objSaved.getId()) ) {
+			throw new Error("Já existe um usuário cadastrado com este userName.");
+		}
 		
 		
 		BeanUtils.copyProperties(obj, objSaved, "id", "password", "username");

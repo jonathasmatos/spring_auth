@@ -40,7 +40,7 @@ public class UserResource {
   @PutMapping("/{id}")
   public User update(@RequestBody User obj){
     User objSaved = createUserService.update(obj);
-    return createUserService.create(objSaved);
+    return createUserService.update(objSaved);
 
   }
 
