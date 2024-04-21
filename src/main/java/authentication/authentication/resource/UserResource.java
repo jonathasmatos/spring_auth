@@ -3,11 +3,14 @@ package authentication.authentication.resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import authentication.authentication.model.User;
@@ -42,6 +45,12 @@ public class UserResource {
     User objSaved = createUserService.update(obj);
     return createUserService.update(objSaved);
 
+  }
+
+  @DeleteMapping("/{id}")
+  //@ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable Long id){
+    createUserService.delete(id);
   }
 
 }

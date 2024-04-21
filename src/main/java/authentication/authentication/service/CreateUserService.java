@@ -54,5 +54,9 @@ public class CreateUserService {
 		return userRepository.save(objSaved);
 	}
   
+  public void delete(Long id) {
+    findById(id);
+    userRepository.deleteById(id);
+  }
 
 }
