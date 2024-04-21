@@ -1,0 +1,25 @@
+package authentication.authentication.resource;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import authentication.authentication.model.Product;
+import authentication.authentication.service.ListProductService;
+
+@RestController
+@RequestMapping("/products")
+public class ProductResource {
+
+  @Autowired
+  ListProductService listProductService;
+
+  @GetMapping
+  public List<Product> list() {
+    return listProductService.listAll();
+  }
+
+}

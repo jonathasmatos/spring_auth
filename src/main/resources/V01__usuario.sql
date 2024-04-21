@@ -1,0 +1,14 @@
+
+-- --- INSERT ROLES
+-- INSERT INTO ROLES(ID, NAME) VALUES('2', 'USER');
+-- INSERT INTO ROLES(ID, NAME) VALUES('1', 'ADMIN');
+
+
+-- --- INSERT PRODUCTS
+-- INSERT INTO PRODUCTS(ID, NAME, DESCRIPTION, SKU) VALUES ('1','Camiseta', 'Camiseta branca masculina', 'C090-200-000');
+-- INSERT INTO PRODUCTS(ID, NAME, DESCRIPTION, SKU) VALUES ('2','Calça', 'Calça skinny feminina', 'C887-100-080');
+-- INSERT INTO PRODUCTS(ID, NAME, DESCRIPTION, SKU) VALUES ('3', 'Vestido', 'Vestido longo rosa', 'V192-877-447');
+
+
+
+
