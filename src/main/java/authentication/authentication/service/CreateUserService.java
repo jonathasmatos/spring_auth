@@ -1,8 +1,11 @@
 package authentication.authentication.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import authentication.authentication.model.User;
 import authentication.authentication.repository.UserRepository;
@@ -13,24 +16,43 @@ public class CreateUserService {
   @Autowired
   UserRepository userRepository;
 
+  @Autowired
   private BCryptPasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
-  
-  public User execute(User user) {
+  public User findById(Long id) {
+		return userRepository.findById(id).orElseThrow(() -> new EmptyResultDataAccessException(1));
+	}
 
-    User existsUser = userRepository.findByUsername(user.getUsername());
+  public User create(User obj) {
 
-    if (existsUser != null) {
-      throw new Error("User already exists!");
-    }
+    // User existsUser = userRepository.findByUsername(obj.getUsername());
 
-    user.setPassword(passwordEncoder().encode(user.getPassword()));
+    // if (existsUser != null) {
+    //   throw new Error("Usuario Existente!");
+    // }
 
-    User createdUser = userRepository.save(user);
+    obj.setPassword(passwordEncoder().encode(obj.getPassword()));
+
+    User createdUser = userRepository.save(obj);
 
     return createdUser;
   }
+
+  public User update(@RequestBody User obj) {
+		
+		User objSaved =  findById(obj.getId());
+
+    // if (!obj.getUsername().equalsIgnoreCase(objSaved.getUsername()) ) {
+		// 	throw new Error("Já existe um usuário cadastrado com este userName.");
+		// }
+		
+		
+		BeanUtils.copyProperties(obj, objSaved, "id", "password", "username");
+		
+		return userRepository.save(objSaved);
+	}
+  
 
 }
